@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar pkID={user.id} />
       <main className="flex-grow max-w-2xl mx-auto px-4 py-12">
         <div className="text-center">
           <h2 className="text-3xl font-light mb-4">
@@ -56,11 +56,11 @@ const Home = () => {
           </p>
         </div>
       </main>
-{/*  
+ 
       <h2>Welcome, {user.first_name || user.username}!</h2>
       <p>Email: {user.email}</p>
       <p>User ID: {user.id}</p>
- */}
+
     </>
   )
 }

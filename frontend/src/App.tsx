@@ -5,6 +5,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import TopPage from "./pages/TopPage";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import ImageUploadForm from "./pages/ImageUploadForm";
 
 const Logout = () => {
   localStorage.clear();
@@ -24,26 +26,14 @@ const App = () => {
     //   <div className="w-full max-w-7xl mx-auto bg-white min-h-screen p-6 shadow-md">
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/profile/:id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/upload" element={<ProtectedRoute><ImageUploadForm /></ProtectedRoute>} />
         <Route path="/login" element={<TopPage />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-
-    // <div>
-    //   <div>
-    //     <Navbar />
-    //     <Home />
-    //   </div>
-    // </div>
   );
 };
 
