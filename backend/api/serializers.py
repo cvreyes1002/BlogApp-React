@@ -27,6 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'first_name', 'last_name')
 
 
+class AvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'avatar')
+        read_only_fields = ('id', 'email')  # Prevents changing email or id during avatar upload
+
 ###########################
 # Original - From Tutorial
 ###########################

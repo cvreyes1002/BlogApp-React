@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import TopPage from "./pages/TopPage";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import ImageUploadForm from "./pages/ImageUploadForm";
+import AvatarUploadForm from "./pages/AvatarUploadForm";
 
 const Logout = () => {
   localStorage.clear();
@@ -28,7 +28,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile/:id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/upload" element={<ProtectedRoute><ImageUploadForm /></ProtectedRoute>} />
+        <Route path="/manage-avatar" element={<ProtectedRoute><AvatarUploadForm /></ProtectedRoute>} />
         <Route path="/login" element={<TopPage />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<NotFound />} />

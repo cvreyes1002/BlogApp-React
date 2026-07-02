@@ -15,7 +15,7 @@ const Profile = () => {
           /> 
           <span className="capitalize">brad</span>
           
-          <Link to="/upload" className="ml-2 inline-block" action="#" method="POST">
+          <Link to="/manage-avatar" className="ml-2 inline-block" action="#" method="POST">
             <button className="px-3 py-1.5 text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 rounded transition-colors duration-200">
               Manage Avatar
             </button>

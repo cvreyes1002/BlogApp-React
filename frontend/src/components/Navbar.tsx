@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Navbar = ({pkID}) => {
+const Navbar = ({pkID}: {pkID: number}) => {
   return (
     <header className="bg-[#f9322c] text-white mb-3">
       <div className="container mx-auto flex flex-col md:flex-row items-center p-3">
@@ -16,7 +16,7 @@ const Navbar = ({pkID}) => {
           <span className="text-white mr-2 cursor-pointer" title="Chat">
             <i className="fas fa-comment"></i>
           </span>
-          <Link to={`/profile/${pkID}`} className="mr-2">
+          <Link to={`/profile/${pkID}`} state={{pkID: pkID}} className="mr-2">
             <img
               title="My Profile"
               className="w-8 h-8 rounded-full"

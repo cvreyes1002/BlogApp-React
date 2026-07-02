@@ -1,8 +1,14 @@
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../api";
+import axios from "axios";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
-const ImageUploadForm = () => {
+
+const AvatarUploadForm = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [error, setError] = useState(null);
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -33,26 +39,41 @@ const ImageUploadForm = () => {
 
     // When uploading files, you must use FormData
     const formData = new FormData();
-    formData.append('image', selectedImage);
+    formData.append('avatar', selectedImage);
 
-    try {
-      console.log('Uploading...', selectedImage.name);
-      
-      // Example API call (replace with your backend URL)
-      /*
-      const response = await fetch('https://your-api.com/upload', {
-        method: 'POST',
-        body: formData, // Do NOT set Content-Type header; browser sets it automatically for FormData
-      });
-      const data = await response.json();
-      console.log('Upload successful:', data);
-      */
-      
-      alert('Image uploaded successfully! (Check console for details)');
-    } catch (error) {
-      console.error('Error uploading image:', error);
+    const fetchUserData = async () => {
+      const token = localStorage.getItem(ACCESS_TOKEN);
+
+      if (!token) {
+          setError("No token found, please log in.");
+          // setLoading(false);
+          return;
+      }
+
+      try {
+        console.log('Uploading...', selectedImage.name);
+
+        // Using PATCH to update the logged-in user's profile
+        const response = await axios.post('http://127.0.0.1:8000/api/manage-avatar/', formData, {
+          headers: {
+            // Explicitly pass your token so Django knows who request.user is
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        // const response = await api.patch("/api/manage-avatar/", formData);
+
+        console.log('Upload successful:', response.data);
+        // return <Navigate to="/profile" />; // Redirect to profile page after successful upload
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
-  };
+    fetchUserData();
+  }
+  // if (loading) return <p>Loading user profile...</p>;
+  // if (error) return <p>{error}</p>;
+
   return (
     <div style={styles.container}>
       <h2>Upload your Image</h2>
@@ -134,4 +155,4 @@ const styles = {
   }
 };
 
-export default ImageUploadForm
+export default AvatarUploadForm
